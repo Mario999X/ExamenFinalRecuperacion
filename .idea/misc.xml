@@ -7,6 +7,8 @@
         <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/drawable/icon_add_empleado.xml" value="0.2615" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/drawable/icon_busqueda.xml" value="0.2615" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/layout/dialog_filter_departamento.xml" value="0.28894927536231885" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/layout/dialog_search_id.xml" value="0.365625" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/layout/empleado_view.xml" value="0.25" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/layout/fragment_add_empleado.xml" value="0.33" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/ExamenFinalRecuperacion/app/src/main/res/layout/fragment_listado_empleados.xml" value="0.36666666666666664" />

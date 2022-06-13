@@ -1,5 +1,6 @@
 package com.example.examenfinalrecuperacion.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +12,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.examenfinalrecuperacion.R;
 import com.example.examenfinalrecuperacion.adapters.EmpleadoAdapter;
@@ -31,12 +39,13 @@ public class ListadoEmpleados extends Fragment {
     EmpleadoAdapter empleadoAdapter;
     LinearLayoutManager llm;
 
+    String opcionSpinner; // Esto tiene que ir fuera si o si, si no da problemas.
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         database = DataRoomDB.getInstance(getContext());
-
 
     }
 
@@ -66,13 +75,82 @@ public class ListadoEmpleados extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menuBusquedaEmpleado:
-                        System.out.println("Busqueda ID");
+                        // CREACION DIALOGO
+                        Dialog dialog = new Dialog(getContext());
+                        dialog.setContentView(R.layout.dialog_search_id);
+
+                        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                        lp.copyFrom(dialog.getWindow().getAttributes());
+                        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+                        dialog.show();
+                        dialog.getWindow().setAttributes(lp);
+
+                        // ELEMENTOS DIALOGO
+                        EditText editTextIdDialog = dialog.findViewById(R.id.editTextIdDialog);
+                        Button btnBuscarId = dialog.findViewById(R.id.btnBuscarId);
+
+                        // LISTENER BOTON
+                        btnBuscarId.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                empleadoEntities = database.empleadoDao().searchEmpleadoId(Integer.parseInt(editTextIdDialog.getText().toString()));
+
+                                empleadoAdapter = new EmpleadoAdapter(empleadoEntities, getActivity());
+                                recyclerListado.setAdapter(empleadoAdapter);
+                                dialog.dismiss();
+                                Toast.makeText(getContext(), "Búsqueda Realizada", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         break;
                     case R.id.menuBusquedaDepartamento:
-                        System.out.println("Busqueda Departamento");
+                        // CREACION DIALOGO
+                        Dialog dialog2 = new Dialog(getContext());
+                        dialog2.setContentView(R.layout.dialog_filter_departamento);
+
+                        WindowManager.LayoutParams lp2 = new WindowManager.LayoutParams();
+                        lp2.copyFrom(dialog2.getWindow().getAttributes());
+                        lp2.width = WindowManager.LayoutParams.MATCH_PARENT;
+                        lp2.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+                        dialog2.show();
+                        dialog2.getWindow().setAttributes(lp2);
+
+                        // ELEMENTOS DIALOGO
+                       Spinner spinnerDepartamentosDialog = dialog2.findViewById(R.id.spinnerDepartamentosDialog);
+                       Button btnFiltrarDepartamentos = dialog2.findViewById(R.id.btnFiltrarDepartamento);
+
+                        // Preparar & Rellenar Spinner
+                        String[] departamentos = new String[]{"Atención al cliente", "Reparaciones", "Marketing", "Dependientes"};
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, departamentos);
+                        spinnerDepartamentosDialog.setAdapter(adapter);
+                        spinnerDepartamentosDialog.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                opcionSpinner = adapterView.getItemAtPosition(i).toString();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+                        // Listener boton de filtro
+                        btnFiltrarDepartamentos.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                empleadoEntities = database.empleadoDao().getEmpleadosDepartamento(opcionSpinner);
+                                empleadoAdapter = new EmpleadoAdapter(empleadoEntities, getActivity());
+                                recyclerListado.setAdapter(empleadoAdapter);
+                                dialog2.dismiss();
+                                Toast.makeText(getContext(), "Filtro Aplicado", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
                         break;
                     case R.id.menuAddEmpleado:
-                        System.out.println("Agregar Empleado");
 
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragLayout, new AddEmpleado()).addToBackStack(null).commit();
 

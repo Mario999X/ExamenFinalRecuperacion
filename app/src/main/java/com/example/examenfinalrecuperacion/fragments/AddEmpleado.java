@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.examenfinalrecuperacion.R;
 import com.example.examenfinalrecuperacion.data.DataRoomDB;
@@ -118,6 +119,7 @@ public class AddEmpleado extends Fragment {
 
                 database.empleadoDao().insert(empleado);
                 database.empleadoDao().getEmpleados();
+                Toast.makeText(getContext(), "Empleado agregado", Toast.LENGTH_SHORT).show();
                 getFragmentManager().popBackStackImmediate();
 
             }
