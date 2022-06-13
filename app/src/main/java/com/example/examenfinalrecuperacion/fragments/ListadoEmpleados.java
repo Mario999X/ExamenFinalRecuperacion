@@ -73,7 +73,7 @@ public class ListadoEmpleados extends Fragment {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menuBusquedaEmpleado:
                         // CREACION DIALOGO
                         Dialog dialog = new Dialog(getContext());
@@ -105,7 +105,7 @@ public class ListadoEmpleados extends Fragment {
                         });
                         break;
                     case R.id.menuBusquedaDepartamento:
-                        // CREACION DIALOGO
+                        // CREACION DIALOGO 2
                         Dialog dialog2 = new Dialog(getContext());
                         dialog2.setContentView(R.layout.dialog_filter_departamento);
 
@@ -117,9 +117,9 @@ public class ListadoEmpleados extends Fragment {
                         dialog2.show();
                         dialog2.getWindow().setAttributes(lp2);
 
-                        // ELEMENTOS DIALOGO
-                       Spinner spinnerDepartamentosDialog = dialog2.findViewById(R.id.spinnerDepartamentosDialog);
-                       Button btnFiltrarDepartamentos = dialog2.findViewById(R.id.btnFiltrarDepartamento);
+                        // ELEMENTOS DIALOGO 2
+                        Spinner spinnerDepartamentosDialog = dialog2.findViewById(R.id.spinnerDepartamentosDialog);
+                        Button btnFiltrarDepartamentos = dialog2.findViewById(R.id.btnFiltrarDepartamento);
 
                         // Preparar & Rellenar Spinner
                         String[] departamentos = new String[]{"Atención al cliente", "Reparaciones", "Marketing", "Dependientes"};
@@ -148,7 +148,6 @@ public class ListadoEmpleados extends Fragment {
                             }
                         });
 
-
                         break;
                     case R.id.menuAddEmpleado:
 
@@ -158,7 +157,6 @@ public class ListadoEmpleados extends Fragment {
                 return false;
             }
         });
-
 
 
         return v;
