@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuBusquedaEmpleado"
+        android:icon="@drawable/icon_busqueda"
+        android:title="Busqueda"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuBusquedaDepartamento"
+        android:icon="@drawable/icon_busqueda_departamento"
+        android:title="busquedaDepartamento"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuAddEmpleado"
+        android:icon="@drawable/icon_add_empleado"
+        android:title="Item"
+        app:showAsAction="ifRoom" />
+</menu>
