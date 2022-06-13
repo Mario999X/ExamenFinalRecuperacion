@@ -22,7 +22,7 @@ public interface EmpleadoDao {
     List<EmpleadoEntity> getEmpleados();
 
     @Query("SELECT * FROM tabla_personal WHERE id = :sId")
-    EmpleadoEntity searchEmpleadoId(Integer sId);
+    List<EmpleadoEntity> searchEmpleadoId(Integer sId);
 
     @Query("SELECT * FROM tabla_personal where departamento = :sDepartamento")
     List<EmpleadoEntity> getEmpleadosDepartamento(String sDepartamento);
